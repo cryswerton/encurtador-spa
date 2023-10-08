@@ -10,7 +10,8 @@
   <script>
   import http from '@/services/http.js'
   import {useAuth} from '@/stores/auth.js'
-  
+  import { useRouter } from 'vue-router';
+
   const auth = useAuth()
   
   export default {
@@ -27,6 +28,7 @@
                   console.log(data.token)
                   auth.setToken(data.token)
                   auth.setUser(JSON.stringify(data.user))
+                  this.$router.push('/dashboard');
               } catch (error) { 
                   console.log(error?.response?.data)
               }
