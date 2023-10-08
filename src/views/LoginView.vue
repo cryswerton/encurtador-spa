@@ -8,8 +8,8 @@
   </template>
   
   <script>
-  import http from '@/services/http.js'
   import {useAuth} from '@/stores/auth.js'
+  import http from '@/services/http.js'
   import { useRouter } from 'vue-router';
 
   const auth = useAuth()
