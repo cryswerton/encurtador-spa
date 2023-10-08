@@ -11,8 +11,6 @@
   import {useAuth} from '@/stores/auth.js'
   import http from '@/services/http.js'
   import { useRouter } from 'vue-router';
-
-  const auth = useAuth()
   
   export default {
       data() {
@@ -24,8 +22,8 @@
       methods: {
           async login() {
               try {
+                  const auth = useAuth()
                   const {data} = await http.post('/login', {email: this.email, password: this.password})
-                  console.log(data.token)
                   auth.setToken(data.token)
                   auth.setUser(JSON.stringify(data.user))
                   this.$router.push('/dashboard');
