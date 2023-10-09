@@ -30,11 +30,34 @@ export const useAuth = defineStore('auth', () => {
         }
     }
 
+    async function logout(){
+        try {
+            const tokenAuth = 'Bearer ' + token.value
+            const {data} = await http.post('/logout', {
+                headers: {
+                    Authorization: tokenAuth
+                }
+            })
+            return data
+        } catch (error) {
+            console.log(error.response.data)
+        }
+    }
+
+    function clear(){
+        localStorage.removeItem('token')
+        localStorage.removeItem('user')
+        token.value = ''
+        user.value = ''
+    }
+
     return {
         token,
         user,
         setToken,
         setUser,
         checkToken,
+        clear,
+        logout,
     }
 })

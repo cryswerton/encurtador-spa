@@ -2,21 +2,29 @@
     <h1>Dashboard</h1>
     <div v-if="name.length > 0">
         <p>You are logged in as {{ name }}</p>
+        <button @click="logout">Log out</button>
     </div>
 </template>
 
 <script>
 import { useAuth } from '@/stores/auth.js'
+import { useRouter } from 'vue-router';
 
 export default {
     data(){
         return {
-            name: ''
+            name: '',
+            auth: useAuth()
         }
     },
+    methods: {
+        async logout(){
+            this.auth.clear()
+            this.$router.push('/');
+        },
+    },
     mounted() {
-        const auth = useAuth()
-        const user = JSON.parse(auth.user)
+        const user = JSON.parse(this.auth.user)
         this.name = user.name
     }
 }
