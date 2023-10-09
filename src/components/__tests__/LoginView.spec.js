@@ -1,4 +1,4 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vitest } from 'vitest'
 
 import { mount } from '@vue/test-utils'
 import LoginView from '../../views/LoginView.vue'
@@ -47,6 +47,17 @@ describe('LoginView', () => {
             const wrapper = mount(LoginView)
             const button = wrapper.find('#btn-login')
             expect(button.text()).toBe('Log in')
+        })
+    })
+
+    describe('Interactions', () => {
+        it('logs in', async () => {
+            const wrapper = mount(LoginView)
+            wrapper.vm.login = vitest.fn();
+
+            await wrapper.find('#btn-login').trigger('click');
+
+            expect(wrapper.vm.login).toHaveBeenCalled();  
         })
     })
 })
