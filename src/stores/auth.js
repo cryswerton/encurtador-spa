@@ -30,6 +30,20 @@ export const useAuth = defineStore('auth', () => {
         }
     }
 
+    async function getLinks(){
+        try {
+            const tokenAuth = 'Bearer ' + token.value
+            const {data} = await http.get('/links', {
+                headers: {
+                    Authorization: tokenAuth
+                }
+            })
+            return data
+        } catch (error) {
+            console.log(error.response.data)
+        }
+    }
+
     async function logout(){
         try {
             const tokenAuth = 'Bearer ' + token.value
@@ -59,5 +73,6 @@ export const useAuth = defineStore('auth', () => {
         checkToken,
         clear,
         logout,
+        getLinks,
     }
 })

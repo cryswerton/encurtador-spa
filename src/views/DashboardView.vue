@@ -1,16 +1,12 @@
-<template>
-    <h1>Dashboard</h1>
-    <div v-if="name.length > 0">
-        <p>You are logged in as {{ name }}</p>
-        <button @click="logout">Log out</button>
-    </div>
-</template>
-
 <script>
 import { useAuth } from '@/stores/auth.js'
 import { useRouter } from 'vue-router';
+import Content from '../components/Content.vue';
 
 export default {
+    components: {
+        Content,
+    },
     data(){
         return {
             name: '',
@@ -30,3 +26,13 @@ export default {
     }
 }
 </script>
+
+<template>
+    <h1>Dashboard</h1>
+    <div v-if="name.length > 0">
+        <p>You are logged in as {{ name }}</p>
+        <button @click="logout">Log out</button>
+    </div>
+    <Content />
+</template>
+
