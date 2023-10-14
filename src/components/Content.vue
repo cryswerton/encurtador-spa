@@ -17,8 +17,8 @@ export default {
     },
     methods: {
         async deleteLink(id){
-            console.log('delete' + id)
-            try {
+            if (confirm("Are you sure about this?")) {
+                try {
                 const auth = useAuth()
                 const tokenAuth = 'Bearer ' + auth.token
 
@@ -35,6 +35,10 @@ export default {
               } catch (error) { 
                 console.log(error?.response?.data)
               }
+            
+            } else {
+            // The user clicked Cancel
+            }
         }
     }
 }
