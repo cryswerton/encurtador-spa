@@ -5,18 +5,14 @@ export default {
     name: 'Content',
     data(){
         return{
-            links: [
-                'link1', 
-                'link2',
-                'link3',
-            ],
+            links: [],
             auth: useAuth(),
         }
     },
     async mounted() {
         const data = await this.auth.getLinks()
-            console.log(data)
-            this.links = data
+        console.log(data)
+        this.links = data
     },
 }
 </script>

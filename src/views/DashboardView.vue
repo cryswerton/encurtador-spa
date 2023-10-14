@@ -19,6 +19,9 @@ export default {
             this.auth.clear()
             this.$router.push('/');
         },
+        newLink(){
+            this.$router.push('/new');
+        },
     },
     mounted() {
         const user = JSON.parse(this.auth.user)
@@ -32,6 +35,7 @@ export default {
     <div v-if="name.length > 0">
         <p>You are logged in as {{ name }}</p>
         <button @click="logout">Log out</button>
+        <button @click="newLink">New</button>
     </div>
     <Content />
 </template>
