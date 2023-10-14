@@ -1,5 +1,6 @@
 <script>
 import {useAuth} from '@/stores/auth.js'
+import http from '@/services/http.js'
 
 export default {
     name: 'Content',
@@ -14,6 +15,28 @@ export default {
         console.log(data)
         this.links = data
     },
+    methods: {
+        async deleteLink(id){
+            console.log('delete' + id)
+            try {
+                const auth = useAuth()
+                const tokenAuth = 'Bearer ' + auth.token
+
+                console.log(tokenAuth)
+
+                const data = await http.delete(`/links/${id}`, {
+                    headers: {
+                        Authorization: tokenAuth
+                    }
+                })
+
+                const links = await this.auth.getLinks()
+                this.links = links
+              } catch (error) { 
+                console.log(error?.response?.data)
+              }
+        }
+    }
 }
 </script>
 
@@ -23,6 +46,7 @@ export default {
         <div>
             <div>{{ link.short_link }}</div>
             <div>{{ link.destination }}</div>
+            <button @click="deleteLink(link.id)">Delete</button>
         </div>
     </div>
 </template>
