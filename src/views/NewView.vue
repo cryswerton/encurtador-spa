@@ -5,6 +5,9 @@
     <label>Destination</label>
     <input type="text" v-model="destination">
     <button id="btn-login" @click.prevent="create">Create</button>
+    <div v-if="errorMessage.length > 0">
+        <div>{{ errorMessage }}</div>
+    </div>
 </template>
 
 <script>
@@ -15,7 +18,8 @@ export default {
     data() {
           return {
               title: '',
-              destination: '',   
+              destination: '',
+              errorMessage: '',   
           }
       },
       methods: {
@@ -32,7 +36,8 @@ export default {
 
                 this.$router.push('/dashboard');
               } catch (error) { 
-                console.log(error?.response?.data)
+                //console.log(error?.response?.data)
+                this.errorMessage = error.response.data.errors.title[0]
               }
           },
       },

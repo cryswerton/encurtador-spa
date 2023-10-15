@@ -33,7 +33,7 @@ export default {
 <template>
     <h1>Dashboard</h1>
     <div v-if="name.length > 0">
-        <p>You are logged in as {{ name }}</p>
+        <p>You are logged in as {{ name }}.</p>
         <button @click="logout">Log out</button>
         <button @click="newLink">New</button>
     </div>
